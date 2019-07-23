@@ -36,7 +36,7 @@ public class MbdPartidos extends Mbd {
                     + "'" + partido.getMarcadorGlobal() + "',"
                     + "'" + partido.getMarcadorVisitante()+ "',"
                     + "'" + sdf.format(partido.getFecha()) + "')");*/
-            ps=conn.prepareStatement("INSERT INTO partido1(equipo_local,equipo_visitante,Estatus,marcador_global,marcador_visitante,cancha,fecha) VALUES(?,?,?,?,?,?,?);");
+            ps=conn.prepareStatement("INSERT INTO partido(equipo_local,equipo_visitante,Estatus,marcador_global,marcador_visitante,cancha,fecha) VALUES(?,?,?,?,?,?,?);");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
             ps.setInt(3, partido.getEstatus());
@@ -63,7 +63,7 @@ public class MbdPartidos extends Mbd {
 
         Partido partido = null;
         try {
-            String aux = "SELECT * FROM partido1 WHERE idPartido=?";
+            String aux = "SELECT * FROM partido WHERE idPartido=?";
             ps = conn.prepareStatement(aux);
             ps.setInt(1, idPartido);
             rst = ps.executeQuery();
@@ -98,7 +98,7 @@ public class MbdPartidos extends Mbd {
         try {
 
             //rst = stmt.executeQuery("SELECT idPartido,equipo_local, equipo_visitante, Estatus, marcador_global, marcador_visitante, fecha FROM partido ORDER BY fecha");
-            ps = conn.prepareStatement("SELECT * FROM partido1 ORDER BY fecha");
+            ps = conn.prepareStatement("SELECT * FROM partido ORDER BY fecha");
             rst = ps.executeQuery();
             while (rst.next()) {
                 Partido partido = new Partido();
@@ -127,7 +127,7 @@ public class MbdPartidos extends Mbd {
 
         try {
             //stmt.executeUpdate("DELETE FROM partido WHERE idPartido=" + idPartido);
-            String aux = "DELETE FROM partido1 WHERE idPartido= ?";
+            String aux = "DELETE FROM partido WHERE idPartido= ?";
             ps = conn.prepareStatement(aux);
             ps.setInt(1, idPartido);
             ps.executeUpdate();
@@ -156,7 +156,7 @@ public class MbdPartidos extends Mbd {
                     + "marcador_global='" + partido.getMarcadorGlobal() + "',"
                     + "marcador_visitante='" + partido.getMarcadorVisitante()+ "',"
                     + "fecha='" + sdf.format(partido.getFecha()) + "' where idPartido="+partido.getIdPartido());*/
-            ps = conn.prepareStatement("UPDATE partido1 SET equipo_local=?, equipo_visitante=?, Estatus=?, marcador_global=?, marcador_visitante=?, cancha=?, fecha=? WHERE idPartido=?");
+            ps = conn.prepareStatement("UPDATE partido SET equipo_local=?, equipo_visitante=?, Estatus=?, marcador_global=?, marcador_visitante=?, cancha=?, fecha=? WHERE idPartido=?");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
             ps.setInt(3, partido.getEstatus());
@@ -191,7 +191,7 @@ public class MbdPartidos extends Mbd {
                     + "Estatus='" + partido.getEstatus() + "',"
                     + "marcador_global='" + partido.getMarcadorGlobal() + "',"
                     + "marcador_visitante='" + partido.getMarcadorVisitante()+ "'where idPartido="+ partido.getIdPartido());*/
-            ps = conn.prepareStatement("UPDATE partido1 SET Estatus=?, marcador_global=?, marcador_visitante=? WHERE idPartido=?"); 
+            ps = conn.prepareStatement("UPDATE partido SET Estatus=?, marcador_global=?, marcador_visitante=? WHERE idPartido=?"); 
             ps.setInt(1, partido.getEstatus());
             ps.setInt(2, partido.getMarcadorGlobal());
             ps.setInt(3, partido.getMarcadorVisitante());
@@ -221,7 +221,7 @@ public class MbdPartidos extends Mbd {
 
 //            rst = stmt.executeQuery("select jugador.Nombre,equipo.Nombre,equipo.Logotipo from jugador,equipo "
 //                    + "where jugador.IdEquipo=equipo.IdEquipo and equipo.IdEquipo= " + idEquipo);
-            ps = conn.prepareStatement("select equipo_local, count(*) from partido1  where equipo_local=?");
+            ps = conn.prepareStatement("select equipo_local, count(*) from partido  where equipo_local=?");
             ps.setInt(1, idVisitante);
             rst = ps.executeQuery();
             while (rst.next()) {
@@ -249,7 +249,7 @@ public class MbdPartidos extends Mbd {
         try {
 
             //rst = stmt.executeQuery("SELECT * FROM partido WHERE estatus = 'defauld local' or estatus = 'defauld visitante'");
-            ps = conn.prepareStatement("select equipo_visitante, count(*) from partido1  where equipo_visitante= ?");
+            ps = conn.prepareStatement("select equipo_visitante, count(*) from partido where equipo_visitante= ?");
             ps.setInt(1, idVisitante);
 
             rst = ps.executeQuery();

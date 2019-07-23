@@ -23,7 +23,7 @@ public class MbdResultados extends Mbd {
         ArrayList<Partido> partidos = new ArrayList<>();
 
         try {
-            ps=conn.prepareStatement("SELECT idPartido,equipo_local, equipo_visitante, Estatus, marcador_global, marcador_visitante, fecha FROM partido1 ORDER BY fecha");
+            ps=conn.prepareStatement("SELECT idPartido,equipo_local, equipo_visitante, Estatus, marcador_global, marcador_visitante, fecha FROM partido ORDER BY fecha");
             rst=ps.executeQuery();
             //rst = stmt.executeQuery("SELECT idPartido,equipo_local, equipo_visitante, Estatus, marcador_global, marcador_visitante, fecha FROM partido ORDER BY fecha");
             while (rst.next()) {

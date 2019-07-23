@@ -29,7 +29,7 @@ public class MbdCategorias extends Mbd{
         try {
 
             //rst = stmt.executeQuery("SELECT idJugador,idEquipo, nombre, direccion, fecha_nacimiento, foto FROM jugador ORDER BY nombre");
-            ps=conn.prepareStatement("SELECT * FROM categoria1");
+            ps=conn.prepareStatement("SELECT * FROM categoria");
             rst=ps.executeQuery();
             while (rst.next()) {
                 Categoria categoria = new Categoria();
