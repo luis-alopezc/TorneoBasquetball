@@ -184,5 +184,4 @@ public class MbdUsuarios extends Mbd {
         }
         return exito;
     }
-
 }
