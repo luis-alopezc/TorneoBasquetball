@@ -149,7 +149,6 @@ public class MbdBitacora extends Mbd {
         stmt = conn.createStatement();
 
         String[] vistas = new String[3];
-
         try {
             //Mostrará todos los urls con sus datos
             System.out.println("select url from bitacora where idUsuario = ? group by 1");
