@@ -21,6 +21,15 @@ public class Partido {
     private Date fecha;
     private String es;
     private String cancha;
+    private int idCancha;
+
+    public int getIdCancha() {
+        return idCancha;
+    }
+
+    public void setIdCancha(int idCancha) {
+        this.idCancha = idCancha;
+    }
 
     public String getCancha() {
         return cancha;
@@ -146,3 +155,4 @@ public class Partido {
     
     
 }
+

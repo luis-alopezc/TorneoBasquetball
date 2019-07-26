@@ -36,13 +36,13 @@ public class MbdPartidos extends Mbd {
                     + "'" + partido.getMarcadorGlobal() + "',"
                     + "'" + partido.getMarcadorVisitante()+ "',"
                     + "'" + sdf.format(partido.getFecha()) + "')");*/
-            ps=conn.prepareStatement("INSERT INTO partido(equipo_local,equipo_visitante,Estatus,marcador_global,marcador_visitante,cancha,fecha) VALUES(?,?,?,?,?,?,?);");
+            ps=conn.prepareStatement("INSERT INTO partido(equipo_local,equipo_visitante,Estatus,marcador_local,marcador_visitante,idCancha,fecha) VALUES(?,?,?,?,?,?,?);");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
             ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getMarcadorGlobal());
             ps.setInt(5, partido.getMarcadorVisitante());
-            ps.setString(6, partido.getCancha());
+            ps.setInt(6, partido.getIdCancha());
             ps.setObject(7, sdf.format(partido.getFecha()));
             ps.executeUpdate();
             
@@ -76,7 +76,7 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorGlobal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setCancha(rst.getString(7));
+                partido.setIdCancha(rst.getInt(7));
                 partido.setFecha(new java.sql.Date(rst.getTimestamp(8).getTime()));
             }
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class MbdPartidos extends Mbd {
                 partido.setEstatus(rst.getInt(4));
                 partido.setMarcadorGlobal(rst.getInt(5));
                 partido.setMarcadorVisitante(rst.getInt(6));
-                partido.setCancha(rst.getString(7));
+                partido.setIdCancha(rst.getInt(7));
                 partido.setFecha(new java.sql.Date(rst.getTimestamp(8).getTime()));
                 partidos.add(partido);
             }
@@ -156,13 +156,13 @@ public class MbdPartidos extends Mbd {
                     + "marcador_global='" + partido.getMarcadorGlobal() + "',"
                     + "marcador_visitante='" + partido.getMarcadorVisitante()+ "',"
                     + "fecha='" + sdf.format(partido.getFecha()) + "' where idPartido="+partido.getIdPartido());*/
-            ps = conn.prepareStatement("UPDATE partido SET equipo_local=?, equipo_visitante=?, Estatus=?, marcador_global=?, marcador_visitante=?, cancha=?, fecha=? WHERE idPartido=?");
+            ps = conn.prepareStatement("UPDATE partido SET equipo_local=?, equipo_visitante=?, Estatus=?, marcador_local=?, marcador_visitante=?, idCancha=?, fecha=? WHERE idPartido=?");
             ps.setInt(1, partido.getEquipoLocal());
             ps.setInt(2, partido.getEquipoVisitante());
             ps.setInt(3, partido.getEstatus());
             ps.setInt(4, partido.getMarcadorGlobal());
             ps.setInt(5, partido.getMarcadorVisitante());
-            ps.setString(6, partido.getCancha());
+            ps.setInt(6, partido.getIdCancha());
             ps.setString(7, sdf.format(partido.getFecha()));
             ps.setInt(8, partido.getIdPartido());
             ps.executeUpdate();
@@ -191,7 +191,7 @@ public class MbdPartidos extends Mbd {
                     + "Estatus='" + partido.getEstatus() + "',"
                     + "marcador_global='" + partido.getMarcadorGlobal() + "',"
                     + "marcador_visitante='" + partido.getMarcadorVisitante()+ "'where idPartido="+ partido.getIdPartido());*/
-            ps = conn.prepareStatement("UPDATE partido SET Estatus=?, marcador_global=?, marcador_visitante=? WHERE idPartido=?"); 
+            ps = conn.prepareStatement("UPDATE partido SET Estatus=?, marcador_local=?, marcador_visitante=? WHERE idPartido=?"); 
             ps.setInt(1, partido.getEstatus());
             ps.setInt(2, partido.getMarcadorGlobal());
             ps.setInt(3, partido.getMarcadorVisitante());
@@ -269,3 +269,4 @@ public class MbdPartidos extends Mbd {
     }
     
 }
+

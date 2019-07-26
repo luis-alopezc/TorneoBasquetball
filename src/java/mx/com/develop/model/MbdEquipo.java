@@ -21,7 +21,7 @@ public class MbdEquipo extends Mbd {
         boolean exito = false;
         try {
 
-            ps = conn.prepareStatement("INSERT INTO equipo (categoria, nombre,logotipo,color_primario,color_secundario) VALUES(?,?,?,?,?)");
+            ps = conn.prepareStatement("INSERT INTO equipo (idCategoria, nombre,logotipo,color_primario,color_secundario) VALUES(?,?,?,?,?)");
             ps.setInt(1, equipo.getIdCategoria());
             ps.setString(2, equipo.getNombre());
             ps.setString(3, equipo.getLogotipo());
@@ -164,7 +164,7 @@ public class MbdEquipo extends Mbd {
 
         boolean exito = false;
         try {
-            ps = conn.prepareStatement("UPDATE equipo SET categoria=?, nombre=?, logotipo=?, color_primario=?, color_secundario=? where idEquipo=?");
+            ps = conn.prepareStatement("UPDATE equipo SET idCategoria=?, nombre=?, logotipo=?, color_primario=?, color_secundario=? where idEquipo=?");
             ps.setInt(1, equipo.getIdCategoria());
             ps.setString(2, equipo.getNombre());
             ps.setString(3, equipo.getLogotipo());
@@ -232,7 +232,7 @@ public class MbdEquipo extends Mbd {
             /*rst = stmt.executeQuery("SELECT marcador_global,marcador_visitante FROM partido "
                     + "where estatus=2 and equipo_local=" + idEquipo);*/
 
-            ps = conn.prepareStatement("SELECT marcador_global,marcador_visitante FROM partido where estatus=2 and equipo_local=?");
+            ps = conn.prepareStatement("SELECT marcador_local,marcador_visitante FROM partido where estatus=2 and equipo_local=?");
             ps.setInt(1, idEquipo);
             rst = ps.executeQuery();
 
@@ -250,7 +250,7 @@ public class MbdEquipo extends Mbd {
             /*rst = stmt.executeQuery("SELECT marcador_visitante,marcador_global FROM partido "
                     + "where estatus=2 and equipo_visitante=" + idEquipo);*/
 
-            ps = conn.prepareStatement("SELECT marcador_visitante,marcador_global FROM partido where estatus=2 and equipo_visitante=?");
+            ps = conn.prepareStatement("SELECT marcador_visitante,marcador_local FROM partido where estatus=2 and equipo_visitante=?");
             ps.setInt(1, idEquipo);
             rst = ps.executeQuery();
             while (rst.next()) {
@@ -266,7 +266,7 @@ public class MbdEquipo extends Mbd {
             /*rst = stmt.executeQuery("SELECT marcador_global,marcador_visitante FROM partido "
                     + "where estatus=3 and equipo_local=" + idEquipo);*/
 
-            ps = conn.prepareStatement("SELECT marcador_global,marcador_visitante FROM partido where estatus=3 and equipo_local=?");
+            ps = conn.prepareStatement("SELECT marcador_local,marcador_visitante FROM partido where estatus=3 and equipo_local=?");
             ps.setInt(1, idEquipo);
             rst = ps.executeQuery();
             while (rst.next()) {
@@ -276,7 +276,7 @@ public class MbdEquipo extends Mbd {
             //Revisando en qué partidos jugados ganó siendo visitante (Estatus 4 es que ganó por default el visitante)
             /*rst = stmt.executeQuery("SELECT marcador_visitante,marcador_global FROM partido "
                     + "where estatus=4 and equipo_visitante=" + idEquipo);*/
-            ps = conn.prepareStatement("SELECT marcador_visitante,marcador_global FROM partido where estatus=3 and equipo_visitante=?");
+            ps = conn.prepareStatement("SELECT marcador_visitante,marcador_local FROM partido where estatus=3 and equipo_visitante=?");
             ps.setInt(1, idEquipo);
             rst = ps.executeQuery();
             while (rst.next()) {
@@ -324,7 +324,7 @@ public class MbdEquipo extends Mbd {
                 //Revisando en qué partidos jugados ganó siendo local (Estatus 2 es jugado)
                 /*rst = stmt.executeQuery("SELECT marcador_global,marcador_visitante FROM partido "
                         + "where estatus=2 and equipo_local=" + equipo.getIdEquipo());*/
-                ps = conn.prepareStatement("SELECT marcador_global,marcador_visitante FROM partido where estatus=2 and equipo_local=?");
+                ps = conn.prepareStatement("SELECT marcador_local,marcador_visitante FROM partido where estatus=2 and equipo_local=?");
                 ps.setInt(1, equipo.getIdEquipo());
                 
                 rst = ps.executeQuery();
@@ -343,7 +343,7 @@ public class MbdEquipo extends Mbd {
                 //Revisando en qué partidos jugados ganó siendo visitante (Estatus 2 es jugado)
                 /*rst = stmt.executeQuery("SELECT marcador_visitante,marcador_global FROM partido "
                         + "where estatus=2 and equipo_visitante=" + equipo.getIdEquipo());*/
-                ps = conn.prepareStatement("SELECT marcador_visitante,marcador_global FROM partido where estatus=2 and equipo_visitante=?");
+                ps = conn.prepareStatement("SELECT marcador_visitante,marcador_local FROM partido where estatus=2 and equipo_visitante=?");
                 ps.setInt(1, equipo.getIdEquipo());
                 rst = ps.executeQuery();
                 
@@ -362,7 +362,7 @@ public class MbdEquipo extends Mbd {
                 /*rst = stmt.executeQuery("SELECT marcador_global,marcador_visitante FROM partido "
                         + "where estatus=3 and equipo_local=" + equipo.getIdEquipo());*/
 
-                ps = conn.prepareStatement("SELECT marcador_global,marcador_visitante FROM partido where estatus=3 and equipo_local=?");
+                ps = conn.prepareStatement("SELECT marcador_local,marcador_visitante FROM partido where estatus=3 and equipo_local=?");
                 ps.setInt(1, equipo.getIdEquipo());
                 rst = ps.executeQuery();
                 while (rst.next()) {
@@ -373,7 +373,7 @@ public class MbdEquipo extends Mbd {
                 //Revisando en qué partidos jugados ganó siendo visitante (Estatus 4 es que ganó por default el visitante)
                 /* rst = stmt.executeQuery("SELECT marcador_visitante,marcador_global FROM partido "
                         + "where estatus=4 and equipo_visitante=" + equipo.getIdEquipo());*/
-                ps = conn.prepareStatement("SELECT marcador_visitante,marcador_global FROM partido where estatus=4 and equipo_visitante=?");
+                ps = conn.prepareStatement("SELECT marcador_visitante,marcador_local FROM partido where estatus=4 and equipo_visitante=?");
                 ps.setInt(1, equipo.getIdEquipo());
                 rst = ps.executeQuery();
                 while (rst.next()) {
@@ -384,7 +384,7 @@ public class MbdEquipo extends Mbd {
                 //Revisando en qué partidos jugados perdió siendo visitante (Estatus 3 es que ganó por default el local)
                 /*rst = stmt.executeQuery("SELECT marcador_global,marcador_visitante FROM partido "
                         + "where estatus=3 and equipo_visitante=" + equipo.getIdEquipo());*/
-                ps = conn.prepareStatement("SELECT marcador_global,marcador_visitante FROM partido where estatus=3 and equipo_visitante=?");
+                ps = conn.prepareStatement("SELECT marcador_local,marcador_visitante FROM partido where estatus=3 and equipo_visitante=?");
                 ps.setInt(1, equipo.getIdEquipo());
                 rst = ps.executeQuery();
                 while (rst.next()) {
@@ -395,7 +395,7 @@ public class MbdEquipo extends Mbd {
                 //Revisando en qué partidos jugados perdió siendo local (Estatus 4 es que ganó por default el visitante)
                 /*rst = stmt.executeQuery("SELECT marcador_visitante,marcador_global FROM partido "
                         + "where estatus=4 and equipo_local=" + equipo.getIdEquipo());*/
-                ps = conn.prepareStatement("SELECT marcador_visitante,marcador_global FROM partido where estatus=4 and equipo_local=?");
+                ps = conn.prepareStatement("SELECT marcador_visitante,marcador_local FROM partido where estatus=4 and equipo_local=?");
                 ps.setInt(1, equipo.getIdEquipo());
                 rst = ps.executeQuery();
                 while (rst.next()) {
@@ -433,3 +433,4 @@ public class MbdEquipo extends Mbd {
         return equipos;
     }
 }
+
