@@ -4,6 +4,8 @@
     Author     : Luis_Lopez
 --%>
 
+<%@page import="mx.com.develop.model.MbdCanchas"%>
+<%@page import="mx.com.develop.objects.Cancha"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="mx.com.develop.model.MbdEquipo"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
@@ -18,6 +20,7 @@
     ArrayList<Partido> listaPartidos = new MbdPartidos().traerTodosLosPartidos();
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     Hashtable<Integer, Equipo> equipo = new MbdEquipo().getEquipos();
+    Hashtable<Integer, Cancha> canchas = new MbdCanchas().getCanchas();
 %>
 <!DOCTYPE html>
 <html>
@@ -51,7 +54,7 @@
                     <td><%=partido.getEs()%></td>
                     <td><%=partido.getMarcadorGlobal()%></td>
                     <td><%=partido.getMarcadorVisitante()%></td>
-                    <td><%=partido.getCancha()%></td>
+                    <td><%=canchas.get(partido.getIdCancha()).getDescripcion()%></td>
                     <td><%=formatoFecha.format(partido.getFecha())%></td>
                     <th><%=partido.getEquipoGanador()%></th>
                     <td><a class="btn btn-primary btn-lg" href="modificarPartidoForm.jsp?idPartido=<%=partido.getIdPartido()%>" role="button">Modificar</a></td>

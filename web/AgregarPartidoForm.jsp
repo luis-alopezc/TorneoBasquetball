@@ -4,6 +4,8 @@
     Author     : Luis_Lopez
 --%>
 
+<%@page import="mx.com.develop.model.MbdCanchas"%>
+<%@page import="mx.com.develop.objects.Cancha"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="mx.com.develop.model.MbdPartidos"%>
 <%@page import="mx.com.develop.model.MbdEquipo"%>
@@ -12,6 +14,7 @@
 <%@ include file="menu.jsp" %>
 <%
     ArrayList<Equipo> equipos = new MbdEquipo().traerTodosLosEquipos();
+    ArrayList<Cancha> listaCanchas = new MbdCanchas().traerCanchas();
 %>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -62,7 +65,15 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="cancha">Cancha:</label>
-                        <input type="text" class="form-control" id="cancha" name="cancha" placeholder="Cancha"/>
+                        <select class="form-control" id="cancha" name="cancha">
+                            <option value="">Seleccione la cancha</option>
+                            <%for(Cancha can : listaCanchas){%>
+                                <option value="<%=can.getIdCancha()%>" 
+                                    > 
+                                    <%=can.getDescripcion()%>
+                                </option>
+                            <%}%>
+                        </select>
                     </div>
                 </div>         
                 <button type="submit" class="btn btn-primary">Guardar</button>

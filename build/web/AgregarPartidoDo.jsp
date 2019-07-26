@@ -4,6 +4,8 @@
     Author     : Luis_Lopez
 --%>
 
+<%@page import="mx.com.develop.objects.Cancha"%>
+<%@page import="mx.com.develop.model.MbdCanchas"%>
 <%@page import="mx.com.develop.model.MbdEquipo"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="mx.com.develop.objects.Equipo"%>
@@ -17,10 +19,12 @@
 <%    ArrayList<Partido> listaPartidos = new MbdPartidos().traerTodosLosPartidos();
     SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     Hashtable<Integer, Equipo> equipo = new MbdEquipo().getEquipos();
+    Hashtable<Integer, Cancha> canchas = new MbdCanchas().getCanchas();
 
     int equipo_local = Integer.parseInt(request.getParameter("idEquipo1"));
     int equipo_visitante = Integer.parseInt(request.getParameter("idEquipo2"));
     String cancha = request.getParameter("cancha");
+    int idCancha = Integer.parseInt(cancha);
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'kk:mm");
     java.util.Date fecha = formatter.parse(request.getParameter("fecha"));
     boolean ver = true;
@@ -58,7 +62,7 @@
                 Partido partido = new Partido();
                 partido.setEquipoLocal(equipo_local);
                 partido.setEquipoVisitante(equipo_visitante);
-                partido.setCancha(cancha);
+                partido.setIdCancha(idCancha);
                 partido.setFecha(new Date(fecha.getTime()));
                 partido.setEstatus(1);
                 boolean exito = new MbdPartidos().insertaPartido(partido);
@@ -69,7 +73,7 @@
             <p>&nbsp;</p>
             <p><b>Equipo local:</b> <%=equipo_local%></p>
             <p><b>Equipo visitante:</b> <%=equipo_visitante%></p>
-            <p><b>Cancha: </b><%=cancha%></p>
+            <p><b>Cancha: </b><%=canchas.get(partido.getIdCancha()).getDescripcion()%></p>
             <p><b>Fecha del partido:</b> <%=fecha%></p>
             <p><a class="btn btn-primary btn-lg" href="partidos.jsp" role="button">Regresar</a></p>
         </div>
